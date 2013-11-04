@@ -1,12 +1,14 @@
 <script src="http://d3js.org/d3.v2.js?2.8.1"></script>
 <script>
 
+var params = {{{ chartParams }}}
+
 // Various accessors that specify the four dimensions of data to visualize.
-function x(d) { return d.income; }
-function y(d) { return d.lifeExpectancy; }
-function radius(d) { return d.population; }
-function color(d) { return d.region; }
-function key(d) { return d.name; }
+function x(d) { return d[params.x]; }
+function y(d) { return d[params.y]; }
+function radius(d) { return d[params.radius]; }
+function color(d) { return d[params.color]; }
+function key(d) { return d[params.key]; }
 
 // Chart dimensions.
 var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
