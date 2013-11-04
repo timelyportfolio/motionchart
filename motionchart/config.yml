@@ -1,5 +1,5 @@
 motionchart:
   jshead:
-  css:
+  css: [css/motionchart.css]
   cdn:
     jshead:
