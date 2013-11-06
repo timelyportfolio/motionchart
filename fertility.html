@@ -73,16 +73,16 @@ text {
 <script>
 
 var params = {
-  "x": "income",
-  "y": "lifeExpectancy",
-  "size": "population",
-  "color": "region",
-  "key": "name",
-  "xrange": [300, 1e5],
-  "yrange": [10, 85],
-  "srange": [0, 5e8],
+  "x": "Fertility",
+  "y": "GDP",
+  "size": "Population",
+  "color": "Region",
+  "key": "Country",
+  "xrange": [1, 7],
+  "yrange": [85, 48500],
+  "srange": [0, 4e8],
   "rrange": [0, 40],
-  "yearRange": [1800, 2009]
+  "yearRange": [1960, 2011]
 }
 
 // Various accessors that specify the four dimensions of data to visualize.
@@ -151,7 +151,7 @@ var label = svg.append("text")
     .text(params.yearRange[0]);
 
 // Load the data.
-d3.json("nations.json", function(nations) {
+d3.json("fertility.json", function(nations) {
 
   // A bisector since many nation's data is sparsely-defined.
   var bisect = d3.bisector(function(d) { return d[0]; });

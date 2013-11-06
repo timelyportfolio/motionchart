@@ -69,21 +69,47 @@ text {
   <a href="../" rel="author">Mike Bostock</a>
 </footer>
 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.2.1/lodash.min.js"></script>
 <script src="http://d3js.org/d3.v2.js?2.8.1"></script>
 <script>
 
 var params = {
-  "x": "income",
-  "y": "lifeExpectancy",
-  "size": "population",
-  "color": "region",
-  "key": "name",
-  "xrange": [300, 1e5],
-  "yrange": [10, 85],
-  "srange": [0, 5e8],
-  "rrange": [0, 40],
-  "yearRange": [1800, 2009]
+  "x": "Fertility",
+  "y": "GDP",
+  "size": "Population",
+  "color": "Region",
+  "key": "Country",
+  "year": "Year",
+  "xrange": [1, 7],
+  "yrange": [1, 48500],
+  "srange": [0, 4e8],
+  "rrange": [0, 10],
+  "yearRange": [1960, 2011]
 }
+
+var transform_data, zip_and_sort;
+
+zip_and_sort = function(d, year, v) {
+  var tmp;
+  tmp = _.zip(_.pluck(d, year), _.pluck(d, v));
+  return _.sortBy(tmp, function(y) {
+    return y[0];
+  });
+};
+
+transform_data = function(data, params) {
+  return _.chain(data).groupBy(function(d) {
+    return d.Country;
+  }).map(function(d, k) {
+      tmp = {}
+      tmp[params.key] = k
+      tmp[params.color] =  d[0][params.color]
+      tmp[params.x] = zip_and_sort(d, params.year, params.x)
+      tmp[params.y] =  zip_and_sort(d, params.year, params.y)
+      tmp[params.size] = zip_and_sort(d, params.year, params.size)
+      return tmp;
+  }).value();
+};
 
 // Various accessors that specify the four dimensions of data to visualize.
 function x(d) { return d[params.x]; }
@@ -151,8 +177,10 @@ var label = svg.append("text")
     .text(params.yearRange[0]);
 
 // Load the data.
-d3.json("nations.json", function(nations) {
+d3.json("fertility2.json", function(nations) {
 
+  var nations = transform_data(nations, params)
+  console.log(nations)
   // A bisector since many nation's data is sparsely-defined.
   var bisect = d3.bisector(function(d) { return d[0]; });
 
