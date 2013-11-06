@@ -11,26 +11,33 @@
   <aside>November 6, 2013</aside>
   <a href="http://github.com/ramnathv" rel="author">Ramnath Vaidyanathan</a>
 </header>
+<body>
+
 
 <h2>MotionChart from Google Spreadsheet</h2>
+<p><em>Wait for the chart to load!!!</em></p>
 
-<p id="chart"></p>
+<div id="chart"></div>
 
 <aside>Mouseover the year to move forward and backwards through time.</aside>
 
 <p class="attribution">Source: <a href="https://github.com/RandomEtc/mind-gapper-js">Tom Carden</a>, <a href="http://gapminder.org">Gapminder</a>, <a href="http://bost.ocks.org/mike/nations/">Mike Bostock</a>.
 
-<p>This is a demo of creating motion charts using <a href="http://d3js.org/">D3</a> and data from a  google spreadsheet. Much of the code here was stolen from <a href='http://bost.ocks.org/mike/nations/'>Mike Bostock</a>, and any remaining errors are solely mine.</p>
+
+
+<p>This is a demo of creating motion charts using <a href="http://d3js.org/">D3</a> and data from a  google spreadsheet. <b>Much of the code here was shamelessly stolen from <a href='http://bost.ocks.org/mike/nations/'>Mike Bostock</a>, and any remaining errors are solely mine. I would also like to credit <a href="http://blog.ouseful.info/2013/11/04/generating-d3js-motion-charts-from-rcharts/">Tony Hirst</a> for creating a reusable template for d3.js based motioncharts and kindling my interest to create this project.</b></p>
 
 <p>The data is fetched from a <a href='https://docs.google.com/spreadsheet/ccc?key=0AovoNzJt5GetdDJ6ajExY1d6SU1xSHdnTTlKRUtQZ2c&usp=drive_web#gid=0'>Google Spreadsheet</a> using <a href="https://github.com/jsoma/tabletop">Tabletop</a> and reshaped into the nested structure that is accepted by the d3js code using <a href='http://lodash.com/'>Lodash</a>. The columns are assumed to be in order: "key", "year", "x", "y", "size" and "color". You can pass the key of the google spreadsheet as a parameter to the URL. Click <a href='http://ramnathv.github.io/motionchart/?gkey=0AovoNzJt5GetdHFwZ05TblNFRGNpTDBjZWFiTkZKZlE'>here</a> to see another motionchart.
 </p>
 
 <p>This is based on Gapminder’s <a href="http://gapminder.org/world/">Wealth & Health of Nations</a>, made famous by Hans Rosling’s memorable <a href="http://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen.html">2006 TED talk</a>. This demo shows the dynamic fluctuation in GDP (<i>x</i>), fertility (<i>y</i>) and population (radius) of 180 nations over the last 209 years. Nations are colored by geographic region; mouseover to read their names.
 
+<p id='disqus_thread'></p>
 <footer>
   <aside>November 8, 2012</aside>
   <a href="http://github.com/ramnathv" rel="author">Ramnath Vaidyanathan</a>
 </footer>
+
 
 <script>
 
@@ -67,3 +74,27 @@ function findRange(data, params, key){
 
 
 </script>
+</body>
+  <script type="text/javascript">
+    var disqus_shortname = 'rcharts';
+    (function() {
+      var dsq = document.createElement('script'); 
+      dsq.type = 'text/javascript'; 
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-36046354-2', 'rcharts.io');
+    ga('send', 'pageview');
+  
+  </script>
+</html>
