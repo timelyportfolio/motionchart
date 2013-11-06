@@ -4,6 +4,9 @@
   margin-left: -40px;
   height: 506px;
 }
+p {
+  text-align: justify;
+}
 
 text {
   font: 10px sans-serif;

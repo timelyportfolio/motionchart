@@ -22,7 +22,7 @@
 
 <p>This is a demo of creating motion charts using <a href="http://d3js.org/">D3</a> and data from a  google spreadsheet. Much of the code here was stolen from <a href='http://bost.ocks.org/mike/nations/'>Mike Bostock</a>, and any remaining errors are solely mine.</p>
 
-<p>The data is fetched from a <a href='https://docs.google.com/spreadsheet/ccc?key=0AovoNzJt5GetdDJ6ajExY1d6SU1xSHdnTTlKRUtQZ2c&usp=drive_web#gid=0'>Google Spreadsheet</a> using <a href="https://github.com/jsoma/tabletop">Tabletop</a>. The columns are assumed to be in order: "key", "year", "x", "y", "size" and "color". You can pass the key of the google spreadsheet as a parameter to the URL.
+<p>The data is fetched from a <a href='https://docs.google.com/spreadsheet/ccc?key=0AovoNzJt5GetdDJ6ajExY1d6SU1xSHdnTTlKRUtQZ2c&usp=drive_web#gid=0'>Google Spreadsheet</a> using <a href="https://github.com/jsoma/tabletop">Tabletop</a> and reshaped into the nested structure that is accepted by the d3js code using <a href='http://lodash.com/'>Lodash</a>. The columns are assumed to be in order: "key", "year", "x", "y", "size" and "color". You can pass the key of the google spreadsheet as a parameter to the URL.
 </p>
 
 <p>This is based on Gapminder’s <a href="http://gapminder.org/world/">Wealth & Health of Nations</a>, made famous by Hans Rosling’s memorable <a href="http://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen.html">2006 TED talk</a>. This demo shows the dynamic fluctuation in GDP (<i>x</i>), fertility (<i>y</i>) and population (radius) of 180 nations over the last 209 years. Nations are colored by geographic region; mouseover to read their names.
