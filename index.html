@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>MotionChart from Google Spreadsheet</title>
+<link rel='stylesheet' href='motionchart/css/motionchart.css'>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.2.1/lodash.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.min.js"></script>
+<script src="motionchart/js/motionchart2.js"></script>
+<script src="motionchart/js/tabletop.js"></script>
+<header>
+  <aside>November 6, 2013</aside>
+  <a href="http://github.com/ramnathv" rel="author">Ramnath Vaidyanathan</a>
+</header>
+
+<h2>MotionChart from Google Spreadsheet</h2>
+
+<p id="chart"></p>
+
+<aside>Mouseover the year to move forward and backwards through time.</aside>
+
+<p class="attribution">Source: <a href="https://github.com/RandomEtc/mind-gapper-js">Tom Carden</a>, <a href="http://gapminder.org">Gapminder</a>, <a href="http://bost.ocks.org/mike/nations/">Mike Bostock</a>.
+
+<p>This is a demo of creating motion charts using <a href="http://d3js.org/">D3</a> and data from a  google spreadsheet. Much of the code here was stolen from <a href='http://bost.ocks.org/mike/nations/'>Mike Bostock</a>, and any remaining errors are solely mine.</p>
+
+<p>The data is fetched from a <a href='https://docs.google.com/spreadsheet/ccc?key=0AovoNzJt5GetdDJ6ajExY1d6SU1xSHdnTTlKRUtQZ2c&usp=drive_web#gid=0'>Google Spreadsheet</a> using <a href="https://github.com/jsoma/tabletop">Tabletop</a>. The columns are assumed to be in order: "key", "year", "x", "y", "size" and "color". You can pass the key of the google spreadsheet as a parameter to the URL.
+</p>
+
+<p>This is based on Gapminder’s <a href="http://gapminder.org/world/">Wealth & Health of Nations</a>, made famous by Hans Rosling’s memorable <a href="http://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen.html">2006 TED talk</a>. This demo shows the dynamic fluctuation in GDP (<i>x</i>), fertility (<i>y</i>) and population (radius) of 180 nations over the last 209 years. Nations are colored by geographic region; mouseover to read their names.
+
+<footer>
+  <aside>November 8, 2012</aside>
+  <a href="http://github.com/ramnathv" rel="author">Ramnath Vaidyanathan</a>
+</footer>
+
+<script>
+
+Tabletop.init( { 
+  key: getURLParameter('gkey'),
+  callback: function(data, tabletop) { 
+    var colnames = ["key", "year", "x", "y", "size", "color"]
+    console.log(_.keys(data[0]))
+    var params = _.zipObject(colnames, _.keys(data[0]))
+    
+    params.xrange = findRange(data, params, 'x')
+    params.yrange = findRange(data, params, 'y')
+    params.srange = findRange(data, params, 'size')
+    params.yearRange = findRange(data, params, 'year')
+    params.rrange = [0, 20]
+    params.dom = 'chart'
+    console.log(params)
+    motionChart(data, params)
+  },
+  simpleSheet: true
+})
+
+function getURLParameter(name) {
+  return decodeURI(
+    (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+  );
+}
+
+function findRange(data, params, key){
+  min_ = _.min(_.map(_.pluck(data, params[key]), Number))
+  max_ = _.max(_.map(_.pluck(data, params[key]), Number))
+  return [min_, max_];
+}
+
+
+</script>

@@ -21,13 +21,14 @@ function motionChart(gdata, params){
   // The x & y axes.
   var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(12, d3.format(",d")),
       yAxis = d3.svg.axis().scale(yScale).orient("left");
-
+      
   // Create the SVG container and set the origin.
-  var svg = d3.select("#" + params.dom).append("svg")
+  var svg = d3.select("#chart").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      
 
   // Add the x-axis.
   svg.append("g")
@@ -46,7 +47,7 @@ function motionChart(gdata, params){
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height - 6)
-      .text("income per capita, inflation-adjusted (dollars)");
+      .text(params.x);
 
   // Add a y-axis label.
   svg.append("text")
@@ -55,7 +56,7 @@ function motionChart(gdata, params){
       .attr("y", 6)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
-      .text("life expectancy (years)");
+      .text(params.y);
 
   // Add the year label; the value is set on transition.
   var label = svg.append("text")
@@ -66,9 +67,15 @@ function motionChart(gdata, params){
       .text(params.yearRange[0]);
 
     var data = transform_data(gdata, params)
-    console.log(data)
+    // console.log(data)
     // A bisector since many nation's data is sparsely-defined.
     var bisect = d3.bisector(function(d) { return d[0]; });
+
+     var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .html(function(d) { return "check"});
+
+    svg.call(tip)
 
     // Add a dot per nation. Initialize the data at 1800, and set the colors.
     var dot = svg.append("g")
