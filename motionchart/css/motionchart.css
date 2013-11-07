@@ -1,4 +1,6 @@
-@import url(http://bost.ocks.org/mike/style.css?20120427);
+/* remove hotlink and replace with link to gh-pages */
+/* @import url(http://bost.ocks.org/mike/style.css?20120427); */
+@import url(http://timelyportfolio.github.io/motionchart/motionchart/css/style.css);
 
 #chart {
   margin-left: -40px;
